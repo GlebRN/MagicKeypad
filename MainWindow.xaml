@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MagicKeypad"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" BorderBrush="Blue" BorderThickness="1"
-        KeyDown="TextBlock_KeyDown" TextInput="Window_TextInput" PreviewKeyDown="Window_PreviewKeyDown">
+        KeyDown="TextBlock_KeyDown" KeyUp="Window_KeyUp" TextInput="Window_TextInput" PreviewKeyDown="Window_PreviewKeyDown">
 
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
@@ -54,7 +54,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="White" ShowGridLines="False" Margin="5">
+    <Grid x:Name="myGrid" Background="White" ShowGridLines="False" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
@@ -122,7 +122,7 @@
         <Label Content="Case Sensitive" BorderBrush="Transparent" Grid.Row="0" Grid.Column="24" Grid.ColumnSpan="7" HorizontalContentAlignment="Left"/>
 
 
-        <Label x:Name="Time" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Transparent" FontSize="14"/>
+        <Label x:Name="Time" Content=" " Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Transparent" FontSize="14"/>
 
 
         <Button Content="Start" Grid.Row="1" Grid.Column="15" Grid.ColumnSpan="8" Margin="2" Click="Start_Button_Click"/>
@@ -159,7 +159,7 @@
         <Label Content="p" Background="#79d279" Grid.Row="5" Grid.Column="21" Grid.ColumnSpan="2"/>
         <Label Content="[" Background="#79d279" Grid.Row="5" Grid.Column="23" Grid.ColumnSpan="2"/>
         <Label Content="]" Background="#79d279" Grid.Row="5" Grid.Column="25" Grid.ColumnSpan="2"/>
-        <Label Content="\" Background="#79d279" Grid.Row="5" Grid.Column="27" Grid.ColumnSpan="3"/>
+        <Label Content="#" Background="#79d279" Grid.Row="5" Grid.Column="27" Grid.ColumnSpan="3"/>
 
         <Label Content="Caps Lock" Background="#999999" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"/>
         <Label Content="a" Background="#b9455f" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2"/>
@@ -175,7 +175,7 @@
         <Label Content="'" Background="#79d279" Grid.Row="6" Grid.Column="24" Grid.ColumnSpan="2"/>
         <Label Content="Enter" Background="#999999" Grid.Row="6" Grid.Column="26" Grid.ColumnSpan="4"/>
 
-        <Label Content="Shift" Background="#999999" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"/>
+        <Label Content="LShift" Background="#999999" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5"/>
         <Label Content="z" Background="#b9455f" Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="2"/>
         <Label Content="x" Background="#ffff99" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="2"/>
         <Label Content="c" Background="#79d279" Grid.Row="7" Grid.Column="9" Grid.ColumnSpan="2"/>
@@ -186,7 +186,7 @@
         <Label Content="," Background="#b9455f" Grid.Row="7" Grid.Column="19" Grid.ColumnSpan="2"/>
         <Label Content="." Background="#ffff99" Grid.Row="7" Grid.Column="21" Grid.ColumnSpan="2"/>
         <Label Content="/" Background="#79d279" Grid.Row="7" Grid.Column="23" Grid.ColumnSpan="2"/>
-        <Label Content="Shift" Background="#999999" Grid.Row="7" Grid.Column="25" Grid.ColumnSpan="5"/>
+        <Label Content="RShift" Background="#999999" Grid.Row="7" Grid.Column="25" Grid.ColumnSpan="5"/>
 
         <Label Content="Ctrl" Background="#999999" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"/>
         <Label Content="Win" Background="#999999" Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="3"/>

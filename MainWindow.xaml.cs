@@ -24,8 +24,11 @@ namespace MagicKeypad
         }
 
         int dificalty; //количество символов, выбираемых из массива char[] letters, устанавливается слайдером
-        int quantity = 10; //количество знаков, которые нужно ввести на тренажере
+        int quantity = 100; //количество знаков, которые нужно ввести на тренажере
         bool checkbox; // с помощью чекбокса задаем массив символов с регистром или без
+
+        Brush oldBackground; // предыдущий цвет клавиши, используется в KeyUp и KetDown
+        bool mixColourPrevent = false; // !?цвет клавиш при быстром нажатии продолжает путаться
 
         int fails; // счетчик ошибок
 
@@ -107,19 +110,180 @@ namespace MagicKeypad
             textBox1.Text = Convert.ToString(charsMin); // отображается количество введенных в минуту символов
         }
 
+        //private void TextBlock_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    string key = e.Key.ToString().ToLower();
+
+        //    foreach (var item in myGrid.Children) // обходим все элементы формы
+        //    {
+        //        if (item is Label lbl && lbl.Content.ToString() == key) // проверяем, что это лэйбл и сравниваем его контент с контентом клавиши в нижнем регистре
+        //        {
+        //            oldBackground = lbl.Background; // запоминаем предыдущий цвет
+        //            lbl.Background = Brushes.Red; // меняем цвет клавиши
+        //        }
+        //    }
+        //}
+
+
+
+        //private void Window_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    string key = e.Key.ToString();
+
+        //    foreach (var item in myGrid.Children) // обходим все элементы формы
+        //    {
+        //        if (item is Label lbl && lbl.Content.ToString() == key.ToLower()) // проверяем, что это лэйбл и сравниваем его контент с контентом клавиши в нижнем регистре
+        //        {
+        //            lbl.Background = oldBackground; // возвращаем предыдущий цвет
+        //        }
+        //    }
+        //}
+
         private void TextBlock_KeyDown(object sender, KeyEventArgs e)
         {
-            // !?в настоящем примере событие KeyDown обрабатывать не нужно
-            // вся обработка происходит в TextInput
-
             string key = e.Key.ToString();
 
-            foreach (var item in ContentControl.Content(Grid)) // обходим все элементы формы
+            Dictionary<string, string> dict = new Dictionary<string, string>
             {
-                if (item is Label && item.Content == key) // проверяем, что это кнопка
+                ["Oem8"] = "`",
+                ["OemMinus"] = "-",
+                ["OemPlus"] = "=",
+                ["OemOpenBrackets"] = "[",
+                ["Oem6"] = "]",
+                ["OemQuotes"] = "#",
+                ["Oem1"] = ";",
+                ["Oem3"] = "'",
+                ["OemComma"] = ",",
+                ["OemPeriod"] = ".",
+                ["OemQuestion"] = "/",
+
+                //["LeftShift"] = "LShift",
+                //["RightShift"] = "RShift",
+                //["Back"]
+                //["Tab"]
+                //["Capital"]
+                //["LeftCtrl"]
+                //["RightCtrl"]
+                //["System"] // alt левый
+                //["LeftCtrl"] // alt правый
+                //["LWin"] // win левый
+                //["Apps"] // win правый
+
+                ["D0"] = "0",
+                ["D1"] = "1",
+                ["D2"] = "2",
+                ["D3"] = "3",
+                ["D4"] = "4",
+                ["D5"] = "5",
+                ["D6"] = "6",
+                ["D7"] = "7",
+                ["D8"] = "8",
+                ["D9"] = "9",
+
+                ["A"] = "a",
+                ["B"] = "b",
+                ["C"] = "c",
+                ["D"] = "d",
+                ["E"] = "e",
+                ["F"] = "f",
+                ["G"] = "g",
+                ["H"] = "h",
+                ["I"] = "i",
+                ["J"] = "j",
+                ["K"] = "k",
+                ["L"] = "l",
+                ["M"] = "m",
+                ["N"] = "n",
+                ["O"] = "o",
+                ["P"] = "p",
+                ["Q"] = "q",
+                ["R"] = "r",
+                ["S"] = "s",
+                ["T"] = "t",
+                ["U"] = "u",
+                ["V"] = "v",
+                ["W"] = "w",
+                ["X"] = "x",
+                ["Y"] = "y",
+                ["Z"] = "z",
+            };
+            dict.TryGetValue(key, out string value);
+
+            foreach (var item in myGrid.Children) // обходим все элементы формы
+            {
+                if (item is Label lbl && lbl.Content.ToString() == value && mixColourPrevent == false) // проверяем, что это лэйбл и сравниваем его контент с контентом клавиши в нижнем регистре
                 {
-                    Color color = item.Red;
-                    item.Background = new SolidColorBrush(color);
+                    oldBackground = lbl.Background; // запоминаем предыдущий цвет
+                    lbl.Background = Brushes.Red; // меняем цвет клавиши
+                    mixColourPrevent = true;
+                }
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            string key = e.Key.ToString();
+
+            Dictionary<string, string> dict = new Dictionary<string, string>
+            {
+                ["Oem8"] = "`",
+                ["OemMinus"] = "-",
+                ["OemPlus"] = "=",
+                ["OemOpenBrackets"] = "[",
+                ["Oem6"] = "]",
+                ["OemQuotes"] = "#",
+                ["Oem1"] = ";",
+                ["Oem3"] = "'",
+                ["OemComma"] = ",",
+                ["OemPeriod"] = ".",
+                ["OemQuestion"] = "/",
+
+                ["D0"] = "0",
+                ["D1"] = "1",
+                ["D2"] = "2",
+                ["D3"] = "3",
+                ["D4"] = "4",
+                ["D5"] = "5",
+                ["D6"] = "6",
+                ["D7"] = "7",
+                ["D8"] = "8",
+                ["D9"] = "9",
+
+                ["A"] = "a",
+                ["B"] = "b",
+                ["C"] = "c",
+                ["D"] = "d",
+                ["E"] = "e",
+                ["F"] = "f",
+                ["G"] = "g",
+                ["H"] = "h",
+                ["I"] = "i",
+                ["J"] = "j",
+                ["K"] = "k",
+                ["L"] = "l",
+                ["M"] = "m",
+                ["N"] = "n",
+                ["O"] = "o",
+                ["P"] = "p",
+                ["Q"] = "q",
+                ["R"] = "r",
+                ["S"] = "s",
+                ["T"] = "t",
+                ["U"] = "u",
+                ["V"] = "v",
+                ["W"] = "w",
+                ["X"] = "x",
+                ["Y"] = "y",
+                ["Z"] = "z",
+            };
+            dict.TryGetValue(key, out string value);
+
+            foreach (var item in myGrid.Children) // обходим все элементы формы
+            {
+                if (item is Label lbl && lbl.Content.ToString() == value && mixColourPrevent == true) // проверяем, что это лэйбл и сравниваем его контент с контентом клавиши в нижнем регистре
+                {
+                    lbl.Background = oldBackground; // возвращаем предыдущий цвет
+                    mixColourPrevent = false;
                 }
             }
         }
@@ -168,6 +332,5 @@ namespace MagicKeypad
                 j++;
             }
         }
-
     }
 }
