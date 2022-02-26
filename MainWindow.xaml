@@ -129,7 +129,11 @@
         <Button Content="Stop" Grid.Row="1" Grid.Column="23" Grid.ColumnSpan="8" Margin="2" Click="Stop_Button_Click"/>
 
         <TextBlock x:Name="textBlock1" Grid.Row="2" Background="#b2c6f6" Grid.ColumnSpan="30"/>
-        <TextBlock x:Name="textBlock2" Grid.Row="3" Background="#b2c6f6" Grid.ColumnSpan="30"/>
+        <TextBlock x:Name="textBlockAbove1st" Grid.Row="2" Background="Green" HorizontalAlignment="Left" Grid.ColumnSpan="30"/>
+
+        <TextBlock x:Name="textBlockUnder2nd" Grid.Row="3" Background="#b2c6f6" Grid.ColumnSpan="30"/>
+        <TextBlock x:Name="textBlock2" Grid.Row="3" Background="Green" HorizontalAlignment="Left" Grid.ColumnSpan="30"/>
+
 
         <Label Content="`" Background="#b9455f" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
         <Label Content="1" Background="#b9455f" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"/>

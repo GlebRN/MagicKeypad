@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MagicKeypad
 {
@@ -88,12 +80,13 @@ namespace MagicKeypad
             timer.Tick += timer_Tick;
             timer.Start();
 
-            // после каждого нажатия старт обнуляем счетчик, сгенерированную строку, введенные символы и ошибки:
+            // после каждого нажатия старт обнуляем счетчик, сгенерированную строку, введенные символы, ошибки т текстблок для закраски строки:
             count = 0;
             str2 = "";
             textBlock2.Text = "";
             fails = 0;
             textBox2.Text = "";
+            textBlockAbove1st.Text = "";
         }
 
         public void timer_Tick(object sender, EventArgs e)
@@ -295,6 +288,7 @@ namespace MagicKeypad
             {
                 e.Handled = true; // если пробел, отклоняем ввод/Enter
                 textBlock2.Text += " ";
+                textBlockAbove1st.Text += textBlock1.Text[count];
                 count++;
             }
             FailCatcher();
@@ -304,6 +298,9 @@ namespace MagicKeypad
         {
             string key = e.Text;
             textBlock2.Text += key;
+            //textBlock2.Inlines.Append(new Run { Text = e.Text, Background = Brushes.Green }); // не получилось сделать закраску строк с помощью Run, пришлось использовать дополнительные текстблоки
+
+            textBlockAbove1st.Text += textBlock1.Text[count]; // закрашиваем верхнюю строку
 
             count++; // подсчет нажатых (со значением) клавиш
 
